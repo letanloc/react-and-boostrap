@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React App</title>
+    <script src="https://fb.me/react-15.0.1.js"></script>
+    <script src="https://fb.me/react-dom-15.0.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <div id="app">
+    </div>
+    <!--thanh menu  -->
+     <!-- Main jumbotron for a primary marketing message or call to action -->
+    <script type="text/babel">
+
+         var  Navar = React.createClass({
+
+             // gán brand cho một biến brand  và gán kiểu dữ liệu của nó là một kiểu string
+             propTypes:{
+                    brand: React.PropTypes.string,
+                    color: React.PropTypes.string
+             },
+            //tạo một method thực hiện ghét props mặc định
+             getDefaultProps :function(){
+                    return {
+                        brand: 'my exanple',
+                        color: 'light'
+                    }
+             },
+             render :function(){
+                 if(this.props.color =='light')var  navClass = "navbar navbar-inverse";
+                 else var navClass = "navbar navbar-default";
+                 var aboutActi='';
+                 var homeActi='';
+
+                 if(this.props.page=='home')homeActi='active';
+                 else  aboutActi ='active';
+                    return(
+
+                        <div>
+                             <nav className={navClass}>
+                                <div className="container-fluid">
+                                    <div className="navbar-header">
+                                        <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                            <span className="sr-only">Toggle navigation</span>
+                                            <span className="icon-bar"></span>
+                                            <span className="icon-bar"></span>
+                                            <span className="icon-bar"></span>
+                                        </button>
+                                        <a className="navbar-brand" href="#">{this.props.brand}</a>
+                                    </div>
+                                    {
+                                    // thiết lâp sự kiện onclick cho các button menu
+                                    }
+                                    <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                        <ul className="nav navbar-nav">
+                                            <li className={homeActi} onClick={this.props.homeclick}><a href="#">HOME</a></li>
+                                            <li  className={aboutActi}  onClick={this.props.aboutclick}><a href="#">ABOUT</a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    );
+             }
+         });
+//--------
+var Jumbotron  = React.createClass({
+     PropTypes: {
+        heading: React.PropTypes.string,
+        text: React.PropTypes.string,
+        link: React.PropTypes.string
+     },
+    /// tạo một header và một content
+    getDefaultProps :function(){
+        return {
+            heading: 'WELCOME',
+            text: 'Note: by default, React will be in development mode. To use React in production mode, set the environment variable NODE_ENV to production (using envify or webpack',
+            link: 'http://google.com'
+        }
+    },
+    render : function(){
+        return(
+            <div>
+                   <div className="jumbotron">
+                     <div className="container">
+                        <h1>{this.props.heading}</h1>
+                        <p>{this.props.text}</p>
+                        <p><a className  ="btn btn-primary btn-lg" href={this.props.link} role="button">Learn more &raquo;</a></p>
+                    </div>
+                </div>
+        </div>
+        );
+    }
+});
+//-------
+    var HomePage  = React.createClass({
+        render : function(){
+            return(
+                <div>
+    <div className="container">
+         <div className="row">
+           sadsaadasdsadadsasdasđsấd
+        </div>
+        <hr/>
+
+    </div>
+       </div>
+            );
+        }
+});
+//----
+var Footer  = React.createClass({
+    render : function(){
+        return(
+            <div className="container">
+                <footer>
+                    <p>&copy;This is My website</p>
+                </footer>
+            </div>
+        );
+    }
+});
+//-------
+var App  = React.createClass({
+                    getInitialState: function(){
+                        return{
+                            page:'home'
+                        }
+                },
+                // sự kiện onclick các giá trị  lưavaofstats
+                handleHomeClick:function(){
+
+                    this.setState({
+                        page :'home'
+                     })
+                    },
+                handleAboutClick:function(){
+                        this.setState({
+                            page: 'about'
+                        })
+                },
+
+    render : function(){
+
+        if(this.state.page =='home'){
+                var jumpage =<Jumbotron/>;
+        }else{
+
+               var jumpage ="";
+        }
+
+
+        return(
+            <div>
+                {
+                    // thằn kia truyền cái gì qua thì thằng kia  nhận cái đó
+                    //<Navar brand="Learn reactJs"/>
+                }
+                {
+                    ///  kiểu nhu tạo một biến xong rôi lấy function taik class app gán cho biến đó
+                    //thực hiện truyền page qua cho nó
+                    // thực hiện get page truyền page đó qua
+                }
+                <Navar
+                    page ={this.state.page}
+                    homeclick ={this.handleHomeClick}
+                    aboutclick ={this.handleAboutClick}
+                    />
+                {
+                    jumpage
+                }
+                <HomePage />
+                <Footer />
+        </div>
+        );
+    }
+});
+
+
+ReactDOM.render(
+    <App />,
+   document.getElementById("app")
+);
+
+    </script>
+
+</body>
+
+</html>
